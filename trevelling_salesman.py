@@ -1,3 +1,6 @@
+"""
+Module for solving the travelling salesman problem
+"""
 import csv
 def read_file(file):
     """
@@ -28,10 +31,28 @@ def read_file(file):
         matrix[int(lst[1])-1][int(lst[0])-1] = int(lst[2])
     return matrix
 
-def greedy():
+def greedy(graph):
     """
+    Greedy alghorithm that finds approximate shortest hamiltonian cycle
     """
-    pass
+    curr_pos = 0
+    verticals_lst = [1]
+    while len(verticals_lst) != len(graph)+1:
+        min_elm = float('inf')
+        min_ind = 0
+        for ind_row, elm in enumerate(graph[curr_pos]):
+            if elm < min_elm and elm != 0 and ind_row+1 not in verticals_lst:
+                min_elm = elm
+                min_ind = ind_row
+        if min_elm == float('inf') and graph[0][curr_pos] != 0:
+            min_elm = graph[0][curr_pos]
+        elif min_elm == float('inf'):
+            return "do not find a way" 
+        verticals_lst.append(min_ind+1)
+        graph[curr_pos][min_ind] = 0
+        graph[min_ind][curr_pos] = 0
+        curr_pos = min_ind
+    return  verticals_lst
 
 def exact():
     """
@@ -41,10 +62,9 @@ def exact():
 def main():
     """
     """
-    pass
+    graph = read_file("graph.csv")
+    print(greedy(graph))
 
 
 if __name__ == "__main__":
-    import doctest
-    print(doctest.testmod())
     main()

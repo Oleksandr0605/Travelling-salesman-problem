@@ -2,6 +2,7 @@
 Module for solving the travelling salesman problem
 """
 import csv
+import copy
 def read_file(file):
     """
     Read a csv file where each line represents two connected vertexes
@@ -31,10 +32,11 @@ def read_file(file):
         matrix[int(lst[1])-1][int(lst[0])-1] = int(lst[2])
     return matrix
 
-def greedy(graph):
+def greedy(graph1):
     """
     Greedy alghorithm that finds approximate shortest hamiltonian cycle
     """
+    graph = copy.deepcopy(graph1)
     curr_pos = 0
     verticals_lst = [1]
     while len(verticals_lst) != len(graph)+1:

@@ -63,6 +63,7 @@ def main():
     """
     """
     graph = read_file("graph.csv")
+    print(graph)
     print(greedy(graph))
 
 

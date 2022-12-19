@@ -47,8 +47,8 @@ def exact(graph: list):
     start = 0
     end = 0
 
-    points = list(dct.keys())
-    points.remove(start)
+    start_points = list(dct.keys())
+    start_points.remove(start)
 
     global memory
     memory = []
@@ -80,7 +80,7 @@ def exact(graph: list):
             
             return answer
     
-    answer = find_min(graph, start, points, end, result = [])
+    answer = find_min(graph, start, start_points, end, result = [])
 
     def decode(memory, answer):
         """

@@ -60,7 +60,7 @@ def exact(graph: list):
     """
     Finds cycle of minimum lenght
     >>> exact([[0, 3, 1, 2], [3, 0, 3, 4], [1, 3, 0, 20], [2, 4, 20, 0]])
-    'path = [0, 3, 1, 2, 0], length = 10'
+    'path = [1, 4, 2, 3, 1], length = 10'
     """
     dct = {}
     for i in range(len(graph)):
@@ -135,7 +135,7 @@ def exact(graph: list):
         result = []
         reverce_dct = dict((v, k) for k, v in dictionary.items())
         for i in answer_in_letters:
-            result.append(reverce_dct[i])
+            result.append(reverce_dct[i] + 1)
         return result
     
     if answer[1] == float('inf'):
@@ -156,9 +156,12 @@ def main():
     """
     """
     graph = read_file("graph.csv")
-    print(graph)
+    # print(graph)
     print(greedy(graph))
+    print(exact(graph))
 
 
 if __name__ == "__main__":
+    # import doctest
+    # print(doctest.testmod())
     main()

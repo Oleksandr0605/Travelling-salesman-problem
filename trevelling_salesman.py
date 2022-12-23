@@ -141,6 +141,8 @@ def exact(graph: list):
     if answer[1] == float('inf'):
         return 'No such way'
     else:
+        # # if you want result in letters uncomment row below
+        # return f'dictionary = {dct}, path = {decode(memory, answer)}, length = {answer[1]}'
         return f'path = {letters_into_numbers(dct, decode(memory, answer))}, length = {answer[1]}'
 
 # matrixes for tests

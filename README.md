@@ -1,13 +1,49 @@
 # Travelling-salesman-problem
 
-## exact()
+## greedy()
 
-> This function implements the Held-Karp algorithm for finding a solution to the traveling salesman problem.
+> Greedy algorithm that is trying to find shortest way throw all vertices.
 > 
 - parameter: graph: list
 - return type: string
 
-> graph is matrix that represents values of edges. Function also has an option to return result in letters. Instruction to this can be found in code.
+> At each iteration we choose shortest edge connected to vertex that has not visited
+> 
+
+```python
+def greedy(graph1):
+    """
+    Greedy alghorithm that finds approximate shortest hamiltonian cycle
+    """
+    graph = copy.deepcopy(graph1)
+    curr_pos = 0
+    verticals_lst = [1]
+    while len(verticals_lst) != len(graph)+1:
+        min_elm = float('inf')
+        min_ind = 0
+        for ind_row, elm in enumerate(graph[curr_pos]):
+            if elm < min_elm and elm != 0 and ind_row+1 not in verticals_lst:
+                min_elm = elm
+                min_ind = ind_row
+        if min_elm == float('inf') and graph[0][curr_pos] != 0:
+            min_elm = graph[0][curr_pos]
+        elif min_elm == float('inf'):
+            return "do not find a way" 
+        verticals_lst.append(min_ind+1)
+        graph[curr_pos][min_ind] = 0
+        graph[min_ind][curr_pos] = 0
+        curr_pos = min_ind
+    return  verticals_lst
+```
+
+## exact()
+
+> This function implements the Held-Karp algorithm for finding a solution to the traveling salesman problem. At each call of a function we make list of points through which we need to go shorter therefore we will reach the end.
+> 
+- parameter: graph: list
+- return type: string
+
+> Graph is matrix that represents values of edges. Function also has an option to return result in letters. Instruction to this can be found in code.
 > 
 
 Author: Ustym Hentosh

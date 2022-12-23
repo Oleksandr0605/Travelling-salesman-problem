@@ -146,7 +146,7 @@ def exact(graph: list):
 
 # matrixes for tests
 # matrix = [[0, 3, 1, 2], [3, 0, 3, 4], [1, 3, 0, 20], [2, 4, 20, 0]]
-matrix = [[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2], [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]]
+# matrix = [[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2], [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]]
 # matrix = [[0, 3, 2, 1, 0], [3, 0, 2, 1, 0], [2, 2, 0, 5, 0], [1, 1, 5, 0, 0], [0, 0, 0, 0, 0]]
 # matrix = [[0, 3, 2, 1, 1, 3], [3, 0, 2, 1, 0, 0], [2, 2, 0, 5, 2, 2], [1, 1, 5, 0, 3, 0], [1, 0, 2, 3, 0, 0], [3, 0, 2, 0, 0]]
 
@@ -157,10 +157,12 @@ def time_test(function=0):
     If function = 0, runs greedy algorithm time test
     If function = 1, runs exact algorithm time test
     '''
-    greedy_alg = timeit.timeit(stmt='greedy([[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2], [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]])',
+    greedy_alg = timeit.timeit(stmt='''greedy([[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2],
+                                       [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]])''',
                                setup='from __main__ import greedy',
                                number=10000)
-    exact_alg = timeit.timeit(stmt='exact([[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2], [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]])',
+    exact_alg = timeit.timeit(stmt='''exact([[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2],
+                                      [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]])''',
                                setup='from __main__ import exact',
                                number=10000)
     if function:

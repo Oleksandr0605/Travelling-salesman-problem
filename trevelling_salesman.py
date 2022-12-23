@@ -2,6 +2,9 @@
 Module for solving the travelling salesman problem
 """
 import csv
+import timeit
+
+
 def read_file(file):
     """
     Read a csv file where each line represents two connected vertexes
@@ -143,19 +146,36 @@ def exact(graph: list):
 
 # matrixes for tests
 # matrix = [[0, 3, 1, 2], [3, 0, 3, 4], [1, 3, 0, 20], [2, 4, 20, 0]]
-# matrix = [[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2], [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]]
+matrix = [[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2], [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]]
 # matrix = [[0, 3, 2, 1, 0], [3, 0, 2, 1, 0], [2, 2, 0, 5, 0], [1, 1, 5, 0, 0], [0, 0, 0, 0, 0]]
 # matrix = [[0, 3, 2, 1, 1, 3], [3, 0, 2, 1, 0, 0], [2, 2, 0, 5, 2, 2], [1, 1, 5, 0, 3, 0], [1, 0, 2, 3, 0, 0], [3, 0, 2, 0, 0]]
 
 # print(exact(matrix))
+def time_test(function=0):
+    '''
+    Test time execution time of function
+    If function = 0, runs greedy algorithm time test
+    If function = 1, runs exact algorithm time test
+    '''
+    greedy_alg = timeit.timeit(stmt='greedy([[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2], [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]])',
+                               setup='from __main__ import greedy',
+                               number=10000)
+    exact_alg = timeit.timeit(stmt='exact([[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2], [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]])',
+                               setup='from __main__ import exact',
+                               number=10000)
+    if function:
+        return exact_alg
+    else:
+        return greedy_alg
 
 
 def main():
     """
     """
-    graph = read_file("graph.csv")
-    print(graph)
-    print(greedy(graph))
+    # graph = read_file("graph.csv")
+    # print(graph)
+    print('Greedy execution time:', time_test(0))
+    print('Exact execution time:', time_test(1))
 
 
 if __name__ == "__main__":

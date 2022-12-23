@@ -179,11 +179,11 @@ def main():
     """
     """
     graph = read_file("graph.csv")
-    # print(graph)
-    # print('Greedy execution time:', time_test(0))
-    # print('Exact execution time:', time_test(1))
-    # print('greedy answer', greedy(graph))
-    # print('exact answer', exact(graph))
+    print(graph)
+    print('Greedy execution time:', time_test(0))
+    print('Exact execution time:', time_test(1))
+    print('greedy answer', greedy(graph))
+    print('exact answer', exact(graph))
 
 if __name__ == "__main__":
     # import doctest

@@ -5,6 +5,7 @@ import csv
 import timeit
 
 
+import copy
 def read_file(file):
     """
     Read a csv file where each line represents two connected vertexes
@@ -34,10 +35,11 @@ def read_file(file):
         matrix[int(lst[1])-1][int(lst[0])-1] = int(lst[2])
     return matrix
 
-def greedy(graph):
+def greedy(graph1):
     """
     Greedy alghorithm that finds approximate shortest hamiltonian cycle
     """
+    graph = copy.deepcopy(graph1)
     curr_pos = 0
     verticals_lst = [1]
     while len(verticals_lst) != len(graph)+1:
@@ -61,7 +63,7 @@ def exact(graph: list):
     """
     Finds cycle of minimum lenght
     >>> exact([[0, 3, 1, 2], [3, 0, 3, 4], [1, 3, 0, 20], [2, 4, 20, 0]])
-    'path = [0, 3, 1, 2, 0], length = 10'
+    'path = [1, 4, 2, 3, 1], length = 10'
     """
     dct = {}
     for i in range(len(graph)):
@@ -136,12 +138,14 @@ def exact(graph: list):
         result = []
         reverce_dct = dict((v, k) for k, v in dictionary.items())
         for i in answer_in_letters:
-            result.append(reverce_dct[i])
+            result.append(reverce_dct[i] + 1)
         return result
     
     if answer[1] == float('inf'):
         return 'No such way'
     else:
+        # # if you want result in letters uncomment row below
+        # return f'dictionary = {dct}, path = {decode(memory, answer)}, length = {answer[1]}'
         return f'path = {letters_into_numbers(dct, decode(memory, answer))}, length = {answer[1]}'
 
 # matrixes for tests
@@ -175,10 +179,12 @@ def main():
     """
     """
     # graph = read_file("graph.csv")
-    # print(graph)
+    # # print(graph)
     print('Greedy execution time:', time_test(0))
     print('Exact execution time:', time_test(1))
 
 
 if __name__ == "__main__":
+    # import doctest
+    # print(doctest.testmod())
     main()

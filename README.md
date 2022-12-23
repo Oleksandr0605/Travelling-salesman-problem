@@ -203,10 +203,38 @@ def exact(graph: list):
         return f'path = {letters_into_numbers(dct, decode(memory, answer))}, length = {answer[1]}'
 ```
 
+## time_test()
+
+> Function tests time of execution of exact and greedy algorithms. It calls each algo 10000 times in order to get more precise result.
+> 
+- parameters function: int (0 or 1)
+- return type: float
+
+```python
+def time_test(function=0):
+    '''
+    Test time execution time of function
+    If function = 0, runs greedy algorithm time test
+    If function = 1, runs exact algorithm time test
+    '''
+    greedy_alg = timeit.timeit(stmt='''greedy([[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2],
+                                       [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]])''',
+                               setup='from __main__ import greedy',
+                               number=10000)
+    exact_alg = timeit.timeit(stmt='''exact([[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2],
+                                      [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]])''',
+                               setup='from __main__ import exact',
+                               number=10000)
+    if function:
+        return exact_alg
+    else:
+        return greedy_alg
+```
+
 | Member | Contribution |
 | --- | --- |
 | Oleksandr Ivaniuk  | greedy, presentation, report |
 | Yaryna Petruniv | read_csv, presentation, report |
 | Ustym Hentosh | exact, presentation, report |
-| Taras Lysun | hard thinking, presentation |
+| Taras Lysun | hard thinking, presentation, time_test |
 | Anna Yaremko | presentation |

@@ -1,5 +1,67 @@
 # Travelling-salesman-problem
 
+## read_csv()
+
+> In this function we need to implement reading from a file. We are given a csv file. By convention, in this file, the first column of the edge is the first vertex, the second is the second, and the third is the weight of the edge. To implement this function, we created a graph.csv file, the content of which looks like this:
+> 
+
+```css
+csv file
+1,2,3
+1,3,2
+1,4,1
+1,5,1
+2,1,3
+2,3,2
+2,4,1
+2,5,0
+3,4,5
+3,5,2
+4,5,3
+5,3,2
+```
+
+- [[0, 3, 2, 1, 1], [3, 0, 2, 1, 0], [2, 2, 0, 5, 2], [1, 1, 5, 0, 3], [1, 0, 2, 3, 0]]
+
+> Next, in order to develop the following functions, we decided that we need to represent the graph as an adjacency matrix for a weighted graph. Because, in the next function, we will need to find the shortest Hamiltonian cycle, and it is easiest to do this when the graph is specified in this way. Therefore, our function must return the matrix as a list of lists.
+> 
+
+Author: Yaryna Petruniv
+
+Helpers: Oleksandr Ivaniuk 
+
+```python
+import csv
+def read_file(file):
+    """
+    Read a csv file where each line represents two connected vertexes
+    and length between them. The first column of each line is the first vertex,
+    the second one is the next vertex, whereas the third column represents the
+    length of the rib between them.
+    """
+    with open(file, "r", encoding="utf-8") as fff:
+        csvreader = csv.reader(fff)
+        mas = []
+        for row in csvreader:
+            mas.append(row)
+    mxm = 0
+    for lst in mas:
+        if int(lst[0]) > mxm:
+            mxm = int(lst[0])
+        if int(lst[1]) > mxm:
+            mxm = int(lst[1])
+    matrix = []
+    for ind in range(mxm):
+        _ = []
+        for jnd in range(mxm):
+            _.append(0)
+        matrix.append(_)
+    for lst in mas:
+        matrix[int(lst[0])-1][int(lst[1])-1] = int(lst[2])
+        matrix[int(lst[1])-1][int(lst[0])-1] = int(lst[2])
+    return matrix
+```
+
 ## greedy()
 
 > Greedy algorithm that is trying to find shortest way throw all vertices.
@@ -9,6 +71,8 @@
 
 > At each iteration we choose shortest edge connected to vertex that has not visited
 > 
+
+Aurthor: Oleksandr Ivaniuk 
 
 ```python
 def greedy(graph1):
@@ -138,3 +202,11 @@ def exact(graph: list):
         # return f'dictionary = {dct}, path = {decode(memory, answer)}, length = {answer[1]}'
         return f'path = {letters_into_numbers(dct, decode(memory, answer))}, length = {answer[1]}'
 ```
+
+| Member | Contribution |
+| --- | --- |
+| Oleksandr Ivaniuk  | greedy, presentation, report |
+| Yaryna Petruniv | read_csv, presentation, report |
+| Ustym Hentosh | exact, presentation, report |
+| Taras Lysun | hard thinking, presentation |
+| Anna Yaremko | presentation |
